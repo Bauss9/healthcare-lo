@@ -18,6 +18,7 @@
             line-height: 1.6;
             color: #333;
             background-color: #ffffff;
+            overflow-x: hidden;
         }
 
         .container {
@@ -348,6 +349,10 @@
                 text-align: center;
             }
 
+            .contact-left{
+                margin-right: 25px;
+            }
+
             .hero-title {
                 font-size: 36px;
             }
@@ -555,6 +560,7 @@
         gap: 50px;
     }
 
+    
     .why-us-left {
         padding-right: 0;
         text-align: center;
@@ -649,6 +655,10 @@
 
 .tech-card.active {
     flex: 3;
+}
+
+.tech-card.mobile-active{
+    flex: initial;
 }
 
 .tech-image {
@@ -750,8 +760,6 @@
     text-orientation: mixed;
     transform: rotate(180deg);
 }
-
-/* Mobile Responsive */
 @media (max-width: 968px) {
     .tech-cards-container {
         flex-direction: column;
@@ -760,38 +768,32 @@
 
     .tech-card {
         flex: none !important;
-        height: 300px;
+        height: 350px;
     }
 
     .tech-card.active {
-        height: 400px;
+        height: 350px;
     }
 
     .tech-content {
-        transform: translateY(0);
-        opacity: 1;
+        transform: translateY(0) !important;
+        opacity: 1 !important;
         padding: 20px;
-    }
-
-    .tech-content h3 {
-        font-size: 20px;
-    }
-
-    .tech-content p {
-        font-size: 14px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 
     .tech-card:not(.active)::after {
-        writing-mode: horizontal-tb;
-        text-orientation: initial;
-        transform: none;
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
+        content: ''
     }
+}
 
-    .technologies-header .section-title {
-        font-size: 36px;
+    @media (max-width: 968px) {
+    .tech-card:not(.active) .tech-content {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
     }
 }
 
@@ -979,7 +981,7 @@
     }
 
     .image-card {
-        height: 180px;
+        height: 300px;
     }
 
     .number-card {
@@ -1031,7 +1033,15 @@
     }
 
     .image-card {
-        height: 160px;
+        height: 300px;
+    }
+
+    .reviews{
+        justify-content: center;
+    }
+
+    .section-label{
+        justify-content: center;
     }
 
     .number-card {
@@ -1135,8 +1145,9 @@
 }
 /* Testimonials Slider - Fixed for mobile */
 .testimonials-wrapper {
-    overflow: hidden;
-    margin: 0 -20px;
+overflow: hidden;
+    margin: 0;
+    max-width: 100%;
 }
 
 .testimonials-track {
@@ -1146,21 +1157,6 @@
     padding: 0 20px;
 }
 
-/* Desktop full-width only */
-@media (min-width: 969px) {
-    .testimonials-wrapper {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-    }
-    
-    .testimonials-track {
-        padding: 0 20px 0 calc(50vw - 600px);
-    }
-}
 
 .testimonial-card {
     flex: 0 0 400px;
@@ -1404,7 +1400,7 @@
 
 .footer-main {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 2fr 1fr;
     gap: 80px;
     margin-bottom: 60px;
 }
@@ -1453,9 +1449,11 @@
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(0, 1fr);
     gap: 40px;
+    flex-flow: row-reverse;
 }
+
 
 .link-group h4 {
     font-size: 18px;
@@ -1756,59 +1754,129 @@
     }
 
     .testimonials-wrapper {
-        margin: 0 -20px;
     }
 
     .testimonials-track {
-        padding: 0 20px;
+        padding: 0;
+justify-content: center;
     }
-
-    .testimonial-card {
-        flex: 0 0 calc(100vw - 40px);
-        max-width: 400px;
-        padding: 30px;
-    }
+.testimonial-card {
+    flex: 0 0 90%;
+    max-width: 350px;
+    margin: 0 auto;
+}
 
     .testimonials-header .section-title {
         font-size: 36px;
     }
+
+    .contact-info{
+        width: 95%
+    }
+}
+/* Mobile-only testimonials */
+.testimonials-mobile {
+    display: none;
+    padding: 80px 0;
+    background: #f8f9fa;
 }
 
-@media (max-width: 768px) {
+.mobile-testimonial-container {
+    max-width: 90%;
+    width: 350px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 0px;
+}
+
+.mobile-testimonial-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: left;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    min-height: 225px;
+}
+
+.mobile-testimonial-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    font-style: italic;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.mobile-testimonial-content p::before {
+    content: '"';
+    font-size: 40px;
+    color: #8B5CF6;
+    position: absolute;
+    top: -10px;
+    left: -15px;
+    line-height: 1;
+    opacity: 0.3;
+}
+
+.mobile-testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mobile-author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mobile-author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mobile-author-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.mobile-author-info span {
+    font-size: 13px;
+    color: #666;
+}
+
+.mobile-nav-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.mobile-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.mobile-dot.active {
+    background: #8B5CF6;
+}
+
+@media (max-width: 968px) {
     .testimonials {
-        padding: 80px 0;
+        display: none !important;
     }
-
-    .testimonials-header {
-        margin-bottom: 40px;
-    }
-
-    .testimonials-header .section-title {
-        font-size: 32px;
-    }
-
-    .testimonials-header .section-description {
-        font-size: 16px;
-    }
-
-    .testimonial-card {
-        flex: 0 0 calc(100vw - 60px);
-        max-width: 350px;
-        padding: 25px;
-        margin: 0 auto;
-    }
-
-    .testimonial-content p {
-        font-size: 16px;
-    }
-
-    .author-info h4 {
-        font-size: 16px;
-    }
-
-    .nav-btn {
-        width: 50px;
-        height: 50px;
+    
+    .testimonials-mobile {
+        display: block !important;
     }
 }
     </style>
@@ -1823,10 +1891,10 @@
                 </div>
                 
                 <ul class="nav-menu">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#careers">Careers</a></li>
-                    <li><a href="#locations">Locations</a></li>
+                    <li><a href="#whyus">Why us</a></li>
+                    <li><a href="#technologies">Technologies</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                 </ul>
 
                 <a href="#contact" class="contact-btn">Contact</a>
@@ -1858,8 +1926,8 @@
                     </p>
 
                     <div class="hero-buttons">
-                        <a href="#about" class="about-btn">About Us</a>
-                        <a href="#services" class="learn-more">Our Services</a>
+                        <a href="#whyus" class="about-btn">About us</a>
+                        <a href="#technologies" class="learn-more">Our Services</a>
                     </div>
 
                     <div class="profile-stack">
@@ -1920,7 +1988,7 @@
     </section>
 
     <!-- Why Choose Us Section -->
-<section class="why-us">
+<section class="why-us" id="whyus">
     <div class="container">
         <div class="why-us-content">
             <!-- Left Side Content -->
@@ -1934,7 +2002,7 @@
                     <p class="section-description">
                         As Malta's leading healthcare provider, we deliver comprehensive services across catering, nursing, and residential care. With 100% market share in hospital catering and 41% of all practicing nurses, we've established ourselves as the trusted partner for critical healthcare infrastructure.
                     </p>
-                    <a href="#services" class="cta-btn">Explore Our Services</a>
+                    <a href="#contact" class="cta-btn">Contact us</a>
                 </div>
             </div>
 
@@ -1973,7 +2041,7 @@
 </section>
 
 <!-- Technologies Section -->
-<section class="technologies">
+<section class="technologies" id="technologies">
     <div class="container">
         <!-- Header Content -->
         <div class="technologies-header">
@@ -1985,7 +2053,6 @@
             <p class="section-description">
                 Our state-of-the-art technology infrastructure ensures seamless operations, from industrial-scale food production to real-time monitoring systems that guarantee the highest standards of care and safety.
             </p>
-            <a href="#technology" class="cta-btn">Discover Our Tech</a>
         </div>
 
         <!-- Interactive Technology Cards -->
@@ -2045,7 +2112,7 @@
 </section>
 
 <!-- Achievements Section -->
-<section class="achievements">
+<section class="achievements" id="achievements">
     <div class="container">
         <!-- Header Content -->
         <div class="achievements-header">
@@ -2246,8 +2313,45 @@
     </div>
 </section>
 
+<!-- Mobile Testimonials -->
+<section class="testimonials-mobile">
+    <div class="container">
+        <div class="testimonials-header">
+            <div class="header-content">
+                <div class="section-label">
+                    <div class="status-dot"></div>
+                    <span>Our Testimonials</span>
+                </div>
+                <h2 class="section-title">People Who Trust Us</h2>
+                <p class="section-description">
+                    Hear from healthcare professionals, facility managers, and government partners who rely on our expertise.
+                </p>
+            </div>
+        </div>
+
+        <div class="mobile-testimonial-container">
+            <div class="mobile-testimonial-card" id="mobileTestimonial">
+                <div class="mobile-testimonial-content">
+                    <p id="mobileTestimonialText"></p>
+                </div>
+                <div class="mobile-testimonial-author">
+                    <div class="mobile-author-avatar">
+                        <img id="mobileAuthorImg" src="" alt="">
+                    </div>
+                    <div class="mobile-author-info">
+                        <h4 id="mobileAuthorName"></h4>
+                        <span id="mobileAuthorTitle"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mobile-nav-dots" id="mobileDots"></div>
+        </div>
+    </div>
+</section>
+
 <!-- Contact Section -->
-<section class="contact">
+<section class="contact" id="contact">
     <div class="container">
         <div class="contact-content">
             <!-- Left Side - Contact Form -->
@@ -2372,7 +2476,7 @@
 </section>
 
 <!-- FAQ Section -->
-<section class="faq">
+<section class="faq" id="faq">
     <div class="container">
         <!-- Header -->
         <div class="faq-header">
@@ -2537,45 +2641,19 @@
                 </div>
 
                 <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Services</h4>
-                        <ul>
-                            <li><a href="#catering">Hospital Catering</a></li>
-                            <li><a href="#staffing">Healthcare Staffing</a></li>
-                            <li><a href="#management">Facility Management</a></li>
-                            <li><a href="#domiciliary">Domiciliary Care</a></li>
-                            <li><a href="#education">Training Programs</a></li>
-                        </ul>
-                    </div>
+
+
+
+
 
                     <div class="link-group">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#careers">Careers</a></li>
-                            <li><a href="#news">News & Updates</a></li>
-                            <li><a href="#sustainability">Sustainability</a></li>
-                            <li><a href="#quality">Quality Standards</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="link-group">
-                        <h4>Locations</h4>
-                        <ul>
-                            <li><a href="#malta">Malta Operations</a></li>
-                            <li><a href="#gozo">Gozo Services</a></li>
-                            <li><a href="#dubai">Dubai Training Center</a></li>
-                            <li><a href="#partnerships">International Partners</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="link-group">
-                        <h4>Support</h4>
+                        <h4>Evercentaury</h4>
                         <ul>
                             <li><a href="#contact">Contact Us</a></li>
-                            <li><a href="#support">Customer Support</a></li>
-                            <li><a href="#privacy">Privacy Policy</a></li>
-                            <li><a href="#terms">Terms of Service</a></li>
+                            <li><a href="#whyus">Why us</a></li>
+                            <li><a href="#technologies">Privacy Policy</a></li>
+                            <li><a href="#FAQ">FAQ</a></li>
+                                                        <li><a href="#technologies">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2813,35 +2891,83 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     updateSlider();
 });
-    </script>
-
-    <script>
-        // FAQ Accordion Functionality
+// Mobile Testimonials - Fixed
 document.addEventListener('DOMContentLoaded', function() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', function() {
-            const isActive = item.classList.contains('active');
-            
-            // Close all FAQ items
-            faqItems.forEach(faqItem => {
-                faqItem.classList.remove('active');
-            });
-            
-            // Open clicked item if it wasn't active
-            if (!isActive) {
-                item.classList.add('active');
+    function initMobileTestimonials() {
+        const mobileTestimonials = [
+            {
+                text: "Evercentaury's catering services have transformed our hospital operations. Their consistent quality and reliability in delivering 4,000+ meals daily is unmatched in Malta.",
+                name: "Dr. Maria Camilleri",
+                title: "Hospital Administrator, Mater Dei",
+                image: "/assets/persons/download (2).jpeg"
+            },
+            {
+                text: "The professionalism and expertise of Evercentaury's nursing staff is exceptional. They've become an integral part of our healthcare delivery system.",
+                name: "Joseph Grech",
+                title: "Director of Nursing, Gozo General Hospital",
+                image: "/assets/persons/download (6).jpeg"
+            },
+            {
+                text: "During COVID-19, Evercentaury's rapid deployment of testing and vaccination personnel was crucial to our national response. Their agility saved lives.",
+                name: "Hon. Chris Fearne",
+                title: "Former Deputy Prime Minister & Health Minister",
+                image: "/assets/persons/download (7).jpeg"
             }
-        });
-    });
+        ];
 
-    // Optional: Open first FAQ by default
-    if (faqItems.length > 0) {
-        faqItems[0].classList.add('active');
+        let currentMobileIndex = 0;
+        
+        function updateMobileTestimonial() {
+            const current = mobileTestimonials[currentMobileIndex];
+            const textEl = document.getElementById('mobileTestimonialText');
+            const nameEl = document.getElementById('mobileAuthorName');
+            const titleEl = document.getElementById('mobileAuthorTitle');
+            const imgEl = document.getElementById('mobileAuthorImg');
+            
+            if (textEl) textEl.textContent = current.text;
+            if (nameEl) nameEl.textContent = current.name;
+            if (titleEl) titleEl.textContent = current.title;
+            if (imgEl) {
+                imgEl.src = current.image;
+                imgEl.alt = current.name;
+            }
+            
+            // Update dots
+            document.querySelectorAll('.mobile-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentMobileIndex);
+            });
+        }
+        
+        function createMobileDots() {
+            const dotsContainer = document.getElementById('mobileDots');
+            if (!dotsContainer) return;
+            
+            dotsContainer.innerHTML = ''; // Clear existing dots
+            mobileTestimonials.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'mobile-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    currentMobileIndex = index;
+                    updateMobileTestimonial();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+        
+        // Initialize
+        createMobileDots();
+        updateMobileTestimonial();
+        
+        // Auto-rotate every 4 seconds
+        setInterval(() => {
+            currentMobileIndex = (currentMobileIndex + 1) % mobileTestimonials.length;
+            updateMobileTestimonial();
+        }, 4000);
     }
+    
+    // Always initialize mobile testimonials
+    setTimeout(initMobileTestimonials, 100);
 });
     </script>
 </body>
