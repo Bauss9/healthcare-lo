@@ -1133,25 +1133,33 @@
     cursor: not-allowed;
     transform: none;
 }
-
-/* Testimonials Slider - Full width overflow */
+/* Testimonials Slider - Fixed for mobile */
 .testimonials-wrapper {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
     overflow: hidden;
+    margin: 0 -20px;
 }
-
-
 
 .testimonials-track {
     display: flex;
     gap: 30px;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0 20px 0 calc(50vw - 600px); /* Start from container edge */
+    padding: 0 20px;
+}
+
+/* Desktop full-width only */
+@media (min-width: 969px) {
+    .testimonials-wrapper {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
+    
+    .testimonials-track {
+        padding: 0 20px 0 calc(50vw - 600px);
+    }
 }
 
 .testimonial-card {
@@ -1222,64 +1230,6 @@
     font-size: 14px;
     color: #666;
     font-weight: 500;
-}
-
-/* Mobile Responsive */
-@media (max-width: 968px) {
-    .testimonials-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 30px;
-    }
-
-    .testimonial-nav {
-        margin-left: 0;
-    }
-
-    .testimonial-card {
-        flex: 0 0 350px;
-        padding: 30px;
-    }
-
-    .testimonials-header .section-title {
-        font-size: 36px;
-    }
-}
-
-@media (max-width: 768px) {
-    .testimonials {
-        padding: 80px 0;
-    }
-
-    .testimonials-header {
-        margin-bottom: 40px;
-    }
-
-    .testimonials-header .section-title {
-        font-size: 32px;
-    }
-
-    .testimonials-header .section-description {
-        font-size: 16px;
-    }
-
-    .testimonial-card {
-        flex: 0 0 300px;
-        padding: 25px;
-    }
-
-    .testimonial-content p {
-        font-size: 16px;
-    }
-
-    .author-info h4 {
-        font-size: 16px;
-    }
-
-    .nav-btn {
-        width: 50px;
-        height: 50px;
-    }
 }
 
 /* Contact Section */
