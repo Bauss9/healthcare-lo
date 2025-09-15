@@ -1792,6 +1792,75 @@
         height: 36px;
     }
 }
+
+/* Mobile Responsive Testimonials Fix */
+@media (max-width: 968px) {
+    .testimonials-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    .testimonial-nav {
+        margin-left: 0;
+    }
+
+    .testimonials-wrapper {
+        margin: 0 -20px;
+    }
+
+    .testimonials-track {
+        padding: 0 20px;
+    }
+
+    .testimonial-card {
+        flex: 0 0 calc(100vw - 40px);
+        max-width: 400px;
+        padding: 30px;
+    }
+
+    .testimonials-header .section-title {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials {
+        padding: 80px 0;
+    }
+
+    .testimonials-header {
+        margin-bottom: 40px;
+    }
+
+    .testimonials-header .section-title {
+        font-size: 32px;
+    }
+
+    .testimonials-header .section-description {
+        font-size: 16px;
+    }
+
+    .testimonial-card {
+        flex: 0 0 calc(100vw - 60px);
+        max-width: 350px;
+        padding: 25px;
+        margin: 0 auto;
+    }
+
+    .testimonial-content p {
+        font-size: 16px;
+    }
+
+    .author-info h4 {
+        font-size: 16px;
+    }
+
+    .nav-btn {
+        width: 50px;
+        height: 50px;
+    }
+}
     </style>
 </head>
 <body>
@@ -2666,7 +2735,7 @@ const cardTitles = [
     </script>
 
     <script>
-        // Testimonials Slider Functionality
+// Updated Testimonials Slider for Mobile
 document.addEventListener('DOMContentLoaded', function() {
     const track = document.getElementById('testimonialsTrack');
     const prevBtn = document.getElementById('prevBtn');
@@ -2674,20 +2743,39 @@ document.addEventListener('DOMContentLoaded', function() {
     const cards = document.querySelectorAll('.testimonial-card');
     
     let currentIndex = 0;
-    const cardWidth = 430; // 400px width + 30px gap
-    const visibleCards = Math.floor(window.innerWidth / cardWidth);
-    const maxIndex = Math.max(0, cards.length - visibleCards);
+    
+    function getCardWidth() {
+        if (window.innerWidth <= 768) {
+            return window.innerWidth - 40; // Full width minus padding on mobile
+        } else if (window.innerWidth <= 968) {
+            return window.innerWidth - 60;
+        } else {
+            return 430; // Desktop width
+        }
+    }
+    
+    function getVisibleCards() {
+        if (window.innerWidth <= 968) {
+            return 1; // Show one card at a time on mobile/tablet
+        } else {
+            return Math.floor(window.innerWidth / 430);
+        }
+    }
     
     function updateSlider() {
-        const translateX = -currentIndex * cardWidth;
+        const cardWidth = getCardWidth();
+        const gap = window.innerWidth <= 768 ? 20 : 30;
+        const translateX = -currentIndex * (cardWidth + gap);
+        
         track.style.transform = `translateX(${translateX}px)`;
         
         // Update button states
         prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= maxIndex;
+        nextBtn.disabled = currentIndex >= cards.length - getVisibleCards();
     }
     
     function goToNext() {
+        const maxIndex = cards.length - getVisibleCards();
         if (currentIndex < maxIndex) {
             currentIndex++;
             updateSlider();
@@ -2705,34 +2793,71 @@ document.addEventListener('DOMContentLoaded', function() {
     nextBtn.addEventListener('click', goToNext);
     prevBtn.addEventListener('click', goToPrev);
     
-    // Auto-play slider
-    let autoPlay = setInterval(goToNext, 4000);
+    // Auto-play slider (pause on mobile)
+    let autoPlay;
+    if (window.innerWidth > 968) {
+        autoPlay = setInterval(goToNext, 4000);
+    }
     
     // Pause auto-play on hover
-    track.addEventListener('mouseenter', () => clearInterval(autoPlay));
-    track.addEventListener('mouseleave', () => {
-        autoPlay = setInterval(goToNext, 4000);
+    track.addEventListener('mouseenter', () => {
+        if (autoPlay) clearInterval(autoPlay);
     });
     
-    // Reset to beginning when reaching end
-    function resetSlider() {
-        if (currentIndex >= maxIndex) {
-            setTimeout(() => {
-                currentIndex = 0;
-                updateSlider();
-            }, 1000);
+    track.addEventListener('mouseleave', () => {
+        if (window.innerWidth > 968) {
+            autoPlay = setInterval(goToNext, 4000);
         }
-    }
+    });
     
     // Handle window resize
     window.addEventListener('resize', () => {
-        const newVisibleCards = Math.floor(window.innerWidth / cardWidth);
-        const newMaxIndex = Math.max(0, cards.length - newVisibleCards);
-        
-        if (currentIndex > newMaxIndex) {
-            currentIndex = newMaxIndex;
+        const maxIndex = cards.length - getVisibleCards();
+        if (currentIndex > maxIndex) {
+            currentIndex = Math.max(0, maxIndex);
         }
         updateSlider();
+        
+        // Restart/stop autoplay based on screen size
+        if (autoPlay) clearInterval(autoPlay);
+        if (window.innerWidth > 968) {
+            autoPlay = setInterval(goToNext, 4000);
+        }
+    });
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let isDragging = false;
+    
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        if (autoPlay) clearInterval(autoPlay);
+    });
+    
+    track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+    });
+    
+    track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) { // Minimum swipe distance
+            if (diff > 0) {
+                goToNext();
+            } else {
+                goToPrev();
+            }
+        }
+        
+        if (window.innerWidth > 968) {
+            autoPlay = setInterval(goToNext, 4000);
+        }
     });
     
     // Initialize
