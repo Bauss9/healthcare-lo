@@ -343,6 +343,9 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .hero {
+                padding: 20px 0;
+            }
             .hero-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -798,6 +801,26 @@
 }
 
 @media (max-width: 768px) {
+
+    /* Tech Cards Container */
+.tech-cards-container {
+    display: flex;
+    height: auto;
+    gap: 25px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.tech-card {
+    position: relative;
+    flex: 1;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
     .technologies {
         padding: 80px 0;
     }
@@ -1908,7 +1931,7 @@ justify-content: center;
             <div class="hero-content">
                 <!-- Left Side Content -->
                 <div class="hero-left">
-                    <div class="reviews">
+                    <!-- <div class="reviews">
                         <div class="stars">
                             <span class="star">★</span>
                             <span class="star">★</span>
@@ -1917,7 +1940,7 @@ justify-content: center;
                             <span class="star">★</span>
                         </div>
                         <span class="review-text">5.0 (428 Reviews)</span>
-                    </div>
+                    </div> -->
 
                     <h1 class="hero-title">Leading Healthcare Excellence Across Malta & Beyond</h1>
                     
