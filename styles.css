@@ -2071,7 +2071,7 @@ nav {
 
     /* Achievements Section Tablet */
     .stats-grid {
-        grid-template-columns: 1fr 1fr;
+
         gap: 20px;
         max-width: 95vw;
         width: 95vw;
