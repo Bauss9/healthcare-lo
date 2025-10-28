@@ -2073,7 +2073,8 @@ nav {
     .stats-grid {
         grid-template-columns: 1fr 1fr;
         gap: 20px;
-        max-width: 600px;
+        max-width: 95vw;
+        width: 95vw;
     }
 
     .center-image {
