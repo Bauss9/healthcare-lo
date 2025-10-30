@@ -507,6 +507,54 @@ function closeSuccessModal() {
 }
 
 // ===================================
+// DOT MATRIX VISUALIZATION
+// ===================================
+
+/**
+ * Initialize dot matrix visualization for stats
+ */
+function initDotMatrix() {
+    const dotMatrices = document.querySelectorAll('.dot-matrix');
+
+    dotMatrices.forEach(matrix => {
+        // Always use same grid: 20x15 = 300 dots (looks perfect on both desktop and mobile)
+        const totalDots = 300;
+        const activeDots = totalDots; // Show ALL dots
+
+        // Create dots
+        for (let i = 0; i < totalDots; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot-matrix-dot';
+            matrix.appendChild(dot);
+        }
+
+        // Activate dots with animation
+        const dots = matrix.querySelectorAll('.dot-matrix-dot');
+        let activated = 0;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && activated === 0) {
+                    // Activate dots with staggered animation
+                    const interval = setInterval(() => {
+                        if (activated < activeDots) {
+                            dots[activated].classList.add('active');
+                            activated++;
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, 10);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        observer.observe(matrix);
+    });
+}
+
+// ===================================
 // INITIALIZATION
 // ===================================
 
@@ -522,7 +570,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeroAnimations();
     initFAQ();
     initContactForm();
-    
+    initDotMatrix();
+
     // Initialize mobile testimonials with slight delay to ensure DOM is ready
     setTimeout(initMobileTestimonials, 100);
 });
