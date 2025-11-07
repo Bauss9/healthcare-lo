@@ -654,3 +654,36 @@ window.addEventListener('scroll', throttle(() => {
 window.addEventListener('resize', debounce(() => {
     // Any resize-based functionality can be added here
 }, 250));
+
+// ===================================
+// SCROLL TO TOP BUTTON
+// ===================================
+
+/**
+ * Initialize scroll to top button
+ */
+function initScrollToTop() {
+    const scrollButton = document.getElementById('scrollToTop');
+
+    if (!scrollButton) return;
+
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollButton.classList.add('visible');
+        } else {
+            scrollButton.classList.remove('visible');
+        }
+    });
+
+    // Scroll to top on click
+    scrollButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Initialize scroll to top
+initScrollToTop();
