@@ -12,6 +12,16 @@
     box-sizing: border-box;
 }
 
+/* Global text overflow prevention */
+h1, h2, h3, h4, h5, h6, p, span, div, a, li {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    hyphens: auto;
+}
+
 html {
     overflow-x: hidden;
     width: 100%;
@@ -25,12 +35,16 @@ body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* ===================================
@@ -160,6 +174,9 @@ nav {
     line-height: 1.2;
     margin-bottom: 20px;
     color: #1a1a1a;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .hero-description {
@@ -240,6 +257,7 @@ nav {
     position: relative;
     width: 100%;
     height: 500px;
+    overflow: hidden;
 }
 
 .main-image {
@@ -292,6 +310,250 @@ nav {
         background-size: cover;
 
     background-image: url('assets/Catered-buffet-at-an-event.jpg');
+}
+
+/* ===================================
+   VIDEO SECTION
+   =================================== */
+.video-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.video-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.video-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.video-title {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.video-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    background: white;
+    border-radius: 24px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.video-container:hover {
+    transform: translateY(-8px);
+}
+
+.video-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    border-radius: 16px;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.video-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(124, 58, 237, 0.3));
+    transition: all 0.3s ease;
+}
+
+.video-container:hover .video-overlay {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(124, 58, 237, 0.4));
+}
+
+/* Custom Play Button */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+}
+
+.play-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 15px 50px rgba(139, 92, 246, 0.6);
+}
+
+.play-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+}
+
+/* Pulsing Rings */
+.play-pulse-ring,
+.play-pulse-ring-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    border: 3px solid rgba(139, 92, 246, 0.6);
+    border-radius: 50%;
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.play-pulse-ring-2 {
+    border-color: rgba(124, 58, 237, 0.4);
+    animation-delay: 1s;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* Decorative elements - removed to prevent overflow */
+
+/* Video Modal */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-modal.active {
+    display: flex;
+}
+
+.video-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    z-index: 10001;
+    animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10002;
+}
+
+.video-modal-close:hover {
+    background: rgba(139, 92, 246, 0.8);
+    border-color: #8B5CF6;
+    transform: rotate(90deg);
+}
+
+.video-modal-frame {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);
+}
+
+.video-modal-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 /* ===================================
@@ -386,6 +648,10 @@ nav {
     padding-bottom: 12px;
     border-bottom: 3px solid #8B5CF6;
     display: inline-block;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
 }
 
 /* Certificate Grid */
@@ -466,6 +732,9 @@ nav {
     color: #1a1a1a;
     margin: 0;
     line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .cert-card p {
@@ -616,6 +885,9 @@ nav {
     line-height: 1.2;
     color: #1a1a1a;
     margin-bottom: 24px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .section-description {
@@ -623,6 +895,8 @@ nav {
     color: #666;
     line-height: 1.6;
     margin-bottom: 40px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .cta-btn {
@@ -1090,8 +1364,8 @@ nav {
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(15, 1fr);
-    gap: 4px;
-    padding: 10px;
+    gap: 2px;
+    padding: 5px;
     place-items: center;
     position: relative;
 }
@@ -1659,6 +1933,9 @@ nav {
     line-height: 1.3;
     margin: 0;
     flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .faq-icon {
@@ -1915,6 +2192,59 @@ nav {
     /* Navigation Mobile */
     .nav-menu {
         display: none;
+    }
+
+    /* Video Section Mobile */
+    .video-section {
+        padding: 60px 0;
+    }
+
+    .video-title {
+        font-size: 32px;
+        margin-bottom: 12px;
+    }
+
+    .video-description {
+        font-size: 16px;
+    }
+
+    .video-header {
+        margin-bottom: 30px;
+    }
+
+    .video-container {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .video-thumbnail {
+        border-radius: 12px;
+    }
+
+    .play-button {
+        width: 70px;
+        height: 70px;
+    }
+
+    .play-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .play-pulse-ring,
+    .play-pulse-ring-2 {
+        width: 70px;
+        height: 70px;
+    }
+
+    .video-modal-content {
+        width: 95%;
+    }
+
+    .video-modal-close {
+        top: -40px;
+        width: 36px;
+        height: 36px;
     }
 
     .hero-image-container {
@@ -2213,6 +2543,23 @@ nav {
    RESPONSIVE DESIGN - TABLET STYLES
    =================================== */
 @media (max-width: 968px) {
+    /* Video Section Tablet */
+    .video-section {
+        padding: 80px 0;
+    }
+
+    .video-title {
+        font-size: 36px;
+    }
+
+    .video-description {
+        font-size: 17px;
+    }
+
+    .video-container {
+        padding: 16px;
+    }
+
     /* Technologies Section Tablet */
     .tech-cards-container {
         flex-direction: column;
@@ -2442,7 +2789,6 @@ nav {
 .why-us-professional {
     padding: 100px 0;
     background: #f8f9fa;
-
 }
 
 /* Section Header */
@@ -2478,12 +2824,17 @@ nav {
     line-height: 1.2;
     margin-bottom: 20px;
     color: #1a1a1a;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .section-header-center .section-description {
     font-size: 17px;
     color: #666;
     line-height: 1.7;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Services Grid */
@@ -2561,6 +2912,9 @@ nav {
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 16px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 /* Service Description */
@@ -2569,6 +2923,8 @@ nav {
     color: #666;
     line-height: 1.7;
     margin-bottom: 24px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .service-card.highlighted > p {
@@ -2878,6 +3234,9 @@ nav {
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .service-intro {
@@ -2885,6 +3244,8 @@ nav {
     color: #666;
     line-height: 1.8;
     margin-bottom: 35px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Service Features Grid */
@@ -2915,6 +3276,9 @@ nav {
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 4px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .feature-content p {
@@ -2922,6 +3286,8 @@ nav {
     color: #666;
     margin: 0;
     line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Service Content Right */

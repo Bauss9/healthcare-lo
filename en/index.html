@@ -93,6 +93,54 @@
         </div>
     </section>
 
+    <!-- ===================================
+         VIDEO SECTION
+         =================================== -->
+    <section class="video-section">
+        <div class="container">
+            <div class="video-wrapper">
+                <div class="video-header">
+                    <h2 class="video-title">Discover Ever Centaury</h2>
+                    <p class="video-description">Watch our story and see how we're transforming healthcare solutions across emerging markets</p>
+                </div>
+                <div class="video-container">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/3zOkPLzsbiY/maxresdefault.jpg" alt="Ever Centaury Video">
+                        <div class="video-overlay"></div>
+                        <button class="play-button" onclick="openVideoModal()">
+                            <div class="play-pulse-ring"></div>
+                            <div class="play-pulse-ring-2"></div>
+                            <svg class="play-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5.14v13.72L19 12L8 5.14z" fill="white"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-modal-overlay" onclick="closeVideoModal()"></div>
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideoModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div class="video-modal-frame">
+                <iframe
+                    id="videoIframe"
+                    src=""
+                    title="Ever Centaury Healthcare Solutions"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
 
         <!-- ===================================
          WHY CHOOSE US SECTION

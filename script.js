@@ -687,3 +687,55 @@ function initScrollToTop() {
 
 // Initialize scroll to top
 initScrollToTop();
+
+// ===================================
+// VIDEO MODAL FUNCTIONALITY
+// ===================================
+
+/**
+ * Open video modal and load YouTube video
+ */
+function openVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoIframe');
+
+    if (modal && iframe) {
+        // Set iframe src to load the video with autoplay
+        iframe.src = 'https://www.youtube.com/embed/3zOkPLzsbiY?autoplay=1&rel=0';
+
+        // Show modal
+        modal.classList.add('active');
+
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+/**
+ * Close video modal and stop video
+ */
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoIframe');
+
+    if (modal && iframe) {
+        // Remove modal
+        modal.classList.remove('active');
+
+        // Stop video by clearing iframe src
+        iframe.src = '';
+
+        // Restore body scroll
+        document.body.style.overflow = '';
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('videoModal');
+        if (modal && modal.classList.contains('active')) {
+            closeVideoModal();
+        }
+    }
+});
